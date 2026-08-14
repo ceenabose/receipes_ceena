@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Recipe Secrets — Asian &amp; Mediterranean Recipes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --terracotta:#d6478e;
@@ -17,17 +20,26 @@
     --white:#ffffff;
     --shadow:0 8px 24px rgba(36,31,56,0.12);
     --radius:14px;
+    --font-heading:'Playfair Display', var(--font-heading);
+    --font-body:'Inter', 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
   body{
-    font-family:'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+    font-family:var(--font-body);
     background:var(--cream);
     color:var(--ink);
     line-height:1.6;
   }
   img{max-width:100%;display:block;}
   a{color:inherit;}
+
+  /* ---------- Scroll reveal ---------- */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity 0.6s ease, transform 0.6s ease;}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+  }
 
   /* ---------- Header ---------- */
   header{
@@ -41,7 +53,7 @@
     display:flex;align-items:center;justify-content:space-between;
   }
   .logo{
-    font-family:Georgia, 'Times New Roman', serif;
+    font-family:var(--font-heading);
     font-size:1.5rem;font-weight:700;
     letter-spacing:0.5px;
     color:var(--terracotta);
@@ -52,7 +64,13 @@
     text-decoration:none;font-weight:600;font-size:0.95rem;
     color:var(--ink-soft);
     transition:color 0.2s;
+    position:relative;
   }
+  nav a:not(.nav-cta)::after{
+    content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;
+    background:var(--terracotta);transition:width 0.25s;
+  }
+  nav a:not(.nav-cta):hover::after{width:100%;}
   nav a:hover{color:var(--terracotta);}
   nav a.nav-cta{
     background:var(--btn-green);color:#fff;padding:9px 18px;border-radius:999px;
@@ -79,7 +97,28 @@
     padding:72px 24px 56px;
     display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;
     align-items:center;
+    position:relative;
   }
+  .hero::before, .hero::after{
+    content:"";position:absolute;z-index:-1;border-radius:50%;filter:blur(60px);opacity:0.35;
+  }
+  .hero::before{
+    width:320px;height:320px;top:-40px;left:-60px;
+    background:radial-gradient(circle, var(--terracotta), transparent 70%);
+  }
+  .hero::after{
+    width:280px;height:280px;bottom:-20px;right:0;
+    background:radial-gradient(circle, var(--olive), transparent 70%);
+  }
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(18px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  .hero > div:first-child > *{animation:fadeUp 0.7s ease both;}
+  .hero > div:first-child > *:nth-child(2){animation-delay:0.08s;}
+  .hero > div:first-child > *:nth-child(3){animation-delay:0.16s;}
+  .hero > div:first-child > *:nth-child(4){animation-delay:0.24s;}
+  .hero > div:first-child > *:nth-child(5){animation-delay:0.32s;}
   @media (max-width:820px){
     .hero{grid-template-columns:1fr;padding-top:48px;text-align:center;}
     .hero-badges{justify-content:center;}
@@ -93,7 +132,7 @@
     margin-bottom:18px;
   }
   .hero h1{
-    font-family:Georgia, 'Times New Roman', serif;
+    font-family:var(--font-heading);
     font-size:clamp(2.2rem, 4.5vw, 3.4rem);
     line-height:1.15;
     margin-bottom:18px;
@@ -120,26 +159,32 @@
     padding:6px 12px;border-radius:999px;
   }
   .hero-visual{
-    aspect-ratio:4/3;border-radius:var(--radius);
-    background:
-      radial-gradient(circle at 30% 30%, rgba(224,168,62,0.55), transparent 60%),
-      radial-gradient(circle at 75% 70%, rgba(107,122,63,0.5), transparent 55%),
-      linear-gradient(135deg, var(--terracotta), var(--olive));
-    box-shadow:var(--shadow);
-    display:flex;align-items:center;justify-content:center;
-    position:relative;overflow:hidden;
+    aspect-ratio:4/3;position:relative;
   }
-  .hero-visual .emoji-grid{
-    font-size:2.6rem;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
-    filter:drop-shadow(0 6px 10px rgba(0,0,0,0.25));
+  .photo-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);
+    gap:10px;width:100%;height:100%;
   }
+  .photo-grid img{
+    width:100%;height:100%;object-fit:cover;border-radius:12px;
+    box-shadow:var(--shadow);transition:transform 0.35s;
+  }
+  .photo-grid img:hover{transform:scale(1.06);z-index:1;}
+  .photo-grid a:nth-child(2) img, .photo-grid a:nth-child(5) img{margin-top:0;}
+  .hero-float-badge{
+    position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);
+    background:var(--white);color:var(--ink);padding:10px 20px;border-radius:999px;
+    box-shadow:var(--shadow);font-weight:700;font-size:0.85rem;white-space:nowrap;
+    animation:fadeUp 0.7s ease 0.4s both;
+  }
+  @media (max-width:820px){ .hero-visual{margin-top:12px;} }
 
   /* ---------- Section shared ---------- */
   section{max-width:1100px;margin:0 auto;padding:64px 24px;}
   .section-head{text-align:center;max-width:640px;margin:0 auto 44px;}
   .section-head .eyebrow{margin-bottom:12px;}
   .section-head h2{
-    font-family:Georgia, 'Times New Roman', serif;
+    font-family:var(--font-heading);
     font-size:clamp(1.8rem,3vw,2.4rem);margin-bottom:12px;
   }
   .section-head p{color:var(--ink-soft);}
@@ -181,7 +226,15 @@
     font-size:3.2rem;position:relative;overflow:hidden;
   }
   .recipe-media img{
-    width:100%;height:100%;object-fit:cover;display:block;
+    width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s ease;
+  }
+  .recipe-card:hover .recipe-media img{transform:scale(1.08);}
+  .ribbon-new{
+    position:absolute;top:12px;right:12px;
+    background:var(--btn-green);color:#fff;
+    font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;
+    padding:5px 10px;border-radius:999px;
+    box-shadow:0 4px 10px rgba(47,158,68,0.4);
   }
   .recipe-media.cuisine-asian{background:linear-gradient(135deg,#5a9bdb,#2f6fae);}
   .recipe-media.cuisine-mediterranean{background:linear-gradient(135deg,#ea7ab3,#d6478e);}
@@ -236,7 +289,7 @@
   .modal-media{height:260px;position:relative;overflow:hidden;font-size:4rem;display:flex;align-items:center;justify-content:center;}
   .modal-media img{width:100%;height:100%;object-fit:cover;}
   .modal-body{padding:28px 28px 32px;}
-  .modal-body h3{font-size:1.5rem;margin-bottom:10px;font-family:Georgia,serif;}
+  .modal-body h3{font-size:1.5rem;margin-bottom:10px;font-family:var(--font-heading);}
   .modal-rating{display:flex;align-items:center;gap:4px;margin-bottom:16px;}
   .modal-rating .star{font-size:1.4rem;cursor:pointer;color:var(--cream-dark);transition:color 0.15s;}
   .modal-rating .star.filled{color:var(--gold);}
@@ -249,7 +302,7 @@
   .about{background:var(--cream-dark);border-radius:var(--radius);}
   .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
   @media (max-width:760px){ .about-grid{grid-template-columns:1fr;} }
-  .about h2{font-family:Georgia,serif;font-size:1.9rem;margin-bottom:16px;}
+  .about h2{font-family:var(--font-heading);font-size:1.9rem;margin-bottom:16px;}
   .about p{color:var(--ink-soft);margin-bottom:14px;}
   .social-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;}
   .social-link{
@@ -260,7 +313,7 @@
   .social-link:hover{transform:translateY(-2px);}
   .stat-row{display:flex;gap:32px;margin-top:24px;flex-wrap:wrap;}
   .stat{}
-  .stat strong{display:block;font-size:1.7rem;color:var(--terracotta);font-family:Georgia,serif;}
+  .stat strong{display:block;font-size:1.7rem;color:var(--terracotta);font-family:var(--font-heading);}
   .stat span{font-size:0.85rem;color:var(--ink-soft);}
   .about-visual{
     border-radius:var(--radius);aspect-ratio:1/1;
@@ -276,7 +329,7 @@
     border-radius:var(--radius);color:#fff;text-align:center;
     padding:60px 24px;
   }
-  .newsletter h2{font-family:Georgia,serif;font-size:2rem;margin-bottom:10px;}
+  .newsletter h2{font-family:var(--font-heading);font-size:2rem;margin-bottom:10px;}
   .newsletter p{opacity:0.92;max-width:480px;margin:0 auto 28px;}
   .newsletter-form{
     display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:460px;margin:0 auto;
@@ -343,15 +396,20 @@
     </div>
   </div>
   <div class="hero-visual">
-    <div class="emoji-grid">
-      <span>🍜</span><span>🥙</span><span>🍢</span>
-      <span>🫒</span><span>🍚</span><span>🥗</span>
+    <div class="photo-grid">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Murgh_Makhani_%28Butter_Chicken%29_2_%288925280003%29.jpg" alt="Butter Chicken" loading="lazy">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Dan-dan_noodles%2C_Shanghai.jpg" alt="Sichuan Dan Dan Noodles" loading="lazy">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/Kerala_Onam_Sadya.jpg" alt="Kerala Onam Sadya" loading="lazy">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Greece_Food_Horiatiki.JPG" alt="Classic Greek Village Salad" loading="lazy">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Fish_Moilee_Kerala_Style_%28aka_KeralaFish_Molly%29.JPG" alt="Kerala Fish Moilee" loading="lazy">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Hummus_Dip_%2830863436677%29.jpg" alt="Lemon-Herb Hummus" loading="lazy">
     </div>
+    <div class="hero-float-badge">⭐ 40+ home-tested recipes</div>
   </div>
 </section>
 
 <section id="recipes">
-  <div class="section-head">
+  <div class="section-head reveal">
     <span class="eyebrow">The Collection</span>
     <h2>Recipes worth keeping secret</h2>
     <p>A growing library of dishes from two of the world's most beloved culinary traditions.</p>
@@ -379,7 +437,7 @@
 </div>
 
 <section id="about">
-  <div class="about">
+  <div class="about reveal">
     <div class="about-grid" style="padding:48px;">
       <div>
         <span class="eyebrow">Meet the Founder</span>
@@ -405,7 +463,7 @@
 </section>
 
 <section id="newsletter">
-  <div class="newsletter">
+  <div class="newsletter reveal">
     <h2>Be the first to taste it</h2>
     <p>Sign up for early access to Recipe Secrets — new recipes, cooking tips, and our launch date, straight to your inbox.</p>
     <form class="newsletter-form" id="signupForm">
@@ -564,6 +622,7 @@
       slug: "kerala-onam-sadya",
       diet: ["Vegetarian", "Gluten-Free"],
       cuisine: "indian",
+      badgeNew: true,
       emoji: "🍌",
       img: "https://upload.wikimedia.org/wikipedia/commons/6/65/Kerala_Onam_Sadya.jpg",
       time: "90 min",
@@ -578,6 +637,7 @@
       slug: "puttu-with-kadala-curry",
       diet: ["Vegan", "Gluten-Free"],
       cuisine: "indian",
+      badgeNew: true,
       emoji: "🥥",
       img: "https://upload.wikimedia.org/wikipedia/commons/f/f1/Puttu_and_Kadala_Curry.jpg",
       time: "40 min",
@@ -592,6 +652,7 @@
       slug: "kerala-fish-moilee",
       diet: ["Pescatarian", "Dairy-Free", "Gluten-Free"],
       cuisine: "indian",
+      badgeNew: true,
       emoji: "🐟",
       img: "https://upload.wikimedia.org/wikipedia/commons/9/9e/Fish_Moilee_Kerala_Style_%28aka_KeralaFish_Molly%29.JPG",
       time: "35 min",
@@ -606,6 +667,7 @@
       slug: "avial",
       diet: ["Vegetarian", "Gluten-Free"],
       cuisine: "indian",
+      badgeNew: true,
       emoji: "🥕",
       img: "https://upload.wikimedia.org/wikipedia/commons/d/d9/AVIYAL_in_Onasadya.jpg",
       time: "30 min",
@@ -620,6 +682,7 @@
       slug: "thalassery-chicken-biryani",
       diet: ["Dairy-Free"],
       cuisine: "indian",
+      badgeNew: true,
       emoji: "🍚",
       img: "https://upload.wikimedia.org/wikipedia/commons/4/44/Prepared_Thalassery_Biriyani.jpg",
       time: "75 min",
@@ -713,13 +776,14 @@
 
     list.forEach(function(r){
       var card = document.createElement("div");
-      card.className = "recipe-card";
+      card.className = "recipe-card reveal";
 
       var mediaClass = "recipe-media cuisine-" + r.cuisine;
 
       card.innerHTML =
         '<div class="' + mediaClass + '">' +
           '<span class="cuisine-tag">' + cuisineLabel(r.cuisine) + '</span>' +
+          (r.badgeNew ? '<span class="ribbon-new">New</span>' : '') +
           '<img src="' + r.img + '" alt="' + r.title + '" loading="lazy">' +
         '</div>' +
         '<div class="recipe-body">' +
@@ -747,6 +811,8 @@
 
       grid.appendChild(card);
     });
+
+    observeReveals();
   }
 
   filterBar.addEventListener("click", function(e){
@@ -843,7 +909,27 @@
     if (m) openModal(decodeURIComponent(m[1]));
   }
 
+  // ---------- Scroll reveal ----------
+  var revealObserver = ("IntersectionObserver" in window)
+    ? new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 })
+    : null;
+
+  function observeReveals(){
+    document.querySelectorAll(".reveal:not(.in-view)").forEach(function(el){
+      if (revealObserver) revealObserver.observe(el);
+      else el.classList.add("in-view");
+    });
+  }
+
   render();
+  observeReveals();
   openFromHash();
   window.addEventListener("hashchange", openFromHash);
 
