@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recipe Secrets — Asian &amp; Mediterranean Recipes</title>
+<style>
+  :root{
+    --terracotta:#d6478e;
+    --olive:#2f6fae;
+    --gold:#7fb3e8;
+    --cream:#f6f1fb;
+    --cream-dark:#eadff3;
+    --ink:#241f38;
+    --ink-soft:#5c5573;
+    --white:#ffffff;
+    --shadow:0 8px 24px rgba(36,31,56,0.12);
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(251,244,234,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--cream-dark);
+  }
+  .nav-wrap{
+    max-width:1100px;margin:0 auto;padding:16px 24px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{
+    font-family:Georgia, 'Times New Roman', serif;
+    font-size:1.5rem;font-weight:700;
+    letter-spacing:0.5px;
+    color:var(--terracotta);
+  }
+  .logo span{color:var(--olive);}
+  nav ul{list-style:none;display:flex;gap:28px;}
+  nav a{
+    text-decoration:none;font-weight:600;font-size:0.95rem;
+    color:var(--ink-soft);
+    transition:color 0.2s;
+  }
+  nav a:hover{color:var(--terracotta);}
+  nav a.nav-cta{
+    background:var(--terracotta);color:#fff;padding:9px 18px;border-radius:999px;
+  }
+  nav a.nav-cta:hover{color:#fff;opacity:0.9;}
+  .nav-toggle{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--ink);}
+
+  @media (max-width:720px){
+    nav ul{
+      position:absolute;top:100%;left:0;right:0;
+      background:var(--cream);
+      flex-direction:column;
+      padding:16px 24px;gap:16px;
+      border-bottom:1px solid var(--cream-dark);
+      display:none;
+    }
+    nav ul.open{display:flex;}
+    .nav-toggle{display:block;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    max-width:1100px;margin:0 auto;
+    padding:72px 24px 56px;
+    display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;
+    align-items:center;
+  }
+  @media (max-width:820px){
+    .hero{grid-template-columns:1fr;padding-top:48px;text-align:center;}
+    .hero-badges{justify-content:center;}
+  }
+  .eyebrow{
+    display:inline-block;
+    text-transform:uppercase;letter-spacing:2px;font-size:0.75rem;
+    font-weight:700;color:var(--olive);
+    background:var(--cream-dark);
+    padding:6px 14px;border-radius:999px;
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-family:Georgia, 'Times New Roman', serif;
+    font-size:clamp(2.2rem, 4.5vw, 3.4rem);
+    line-height:1.15;
+    margin-bottom:18px;
+  }
+  .hero h1 em{color:var(--terracotta);font-style:normal;}
+  .hero p.lead{
+    font-size:1.1rem;color:var(--ink-soft);max-width:46ch;margin-bottom:28px;
+  }
+  @media (max-width:820px){ .hero p.lead{margin-left:auto;margin-right:auto;} }
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:28px;}
+  @media (max-width:820px){ .hero-actions{justify-content:center;} }
+  .btn{
+    display:inline-block;padding:13px 28px;border-radius:999px;
+    font-weight:700;font-size:0.95rem;text-decoration:none;
+    cursor:pointer;border:2px solid transparent;transition:transform 0.15s, box-shadow 0.15s;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--terracotta);color:#fff;box-shadow:0 6px 16px rgba(214,71,142,0.35);}
+  .btn-outline{background:transparent;border-color:var(--olive);color:var(--olive);}
+  .hero-badges{display:flex;gap:10px;flex-wrap:wrap;}
+  .badge{
+    font-size:0.8rem;font-weight:600;color:var(--ink-soft);
+    background:var(--white);border:1px solid var(--cream-dark);
+    padding:6px 12px;border-radius:999px;
+  }
+  .hero-visual{
+    aspect-ratio:4/3;border-radius:var(--radius);
+    background:
+      radial-gradient(circle at 30% 30%, rgba(224,168,62,0.55), transparent 60%),
+      radial-gradient(circle at 75% 70%, rgba(107,122,63,0.5), transparent 55%),
+      linear-gradient(135deg, var(--terracotta), var(--olive));
+    box-shadow:var(--shadow);
+    display:flex;align-items:center;justify-content:center;
+    position:relative;overflow:hidden;
+  }
+  .hero-visual .emoji-grid{
+    font-size:2.6rem;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+    filter:drop-shadow(0 6px 10px rgba(0,0,0,0.25));
+  }
+
+  /* ---------- Section shared ---------- */
+  section{max-width:1100px;margin:0 auto;padding:64px 24px;}
+  .section-head{text-align:center;max-width:640px;margin:0 auto 44px;}
+  .section-head .eyebrow{margin-bottom:12px;}
+  .section-head h2{
+    font-family:Georgia, 'Times New Roman', serif;
+    font-size:clamp(1.8rem,3vw,2.4rem);margin-bottom:12px;
+  }
+  .section-head p{color:var(--ink-soft);}
+
+  /* ---------- Search + Filter bar ---------- */
+  .search-row{display:flex;justify-content:center;margin-bottom:20px;}
+  .search-input{
+    width:100%;max-width:480px;padding:13px 20px;border-radius:999px;
+    border:2px solid var(--cream-dark);background:var(--white);
+    font-size:0.95rem;color:var(--ink);
+  }
+  .search-input:focus{outline:none;border-color:var(--terracotta);}
+  .filter-bar{
+    display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:20px;
+  }
+  .filter-btn{
+    background:var(--white);border:2px solid var(--cream-dark);
+    padding:10px 22px;border-radius:999px;font-weight:700;font-size:0.9rem;
+    cursor:pointer;color:var(--ink-soft);transition:all 0.2s;
+  }
+  .filter-btn:hover{border-color:var(--terracotta);color:var(--terracotta);}
+  .filter-btn.active{background:var(--terracotta);border-color:var(--terracotta);color:#fff;}
+  .no-results{display:none;text-align:center;color:var(--ink-soft);margin-bottom:24px;}
+  .no-results.show{display:block;}
+
+  /* ---------- Recipe grid ---------- */
+  .recipe-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px;
+  }
+  .recipe-card{
+    background:var(--white);border-radius:var(--radius);overflow:hidden;
+    box-shadow:var(--shadow);
+    display:flex;flex-direction:column;
+    transition:transform 0.2s, box-shadow 0.2s;
+  }
+  .recipe-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(44,36,32,0.18);}
+  .recipe-media{
+    height:170px;display:flex;align-items:center;justify-content:center;
+    font-size:3.2rem;position:relative;overflow:hidden;
+  }
+  .recipe-media img{
+    width:100%;height:100%;object-fit:cover;display:block;
+  }
+  .recipe-media.cuisine-asian{background:linear-gradient(135deg,#5a9bdb,#2f6fae);}
+  .recipe-media.cuisine-mediterranean{background:linear-gradient(135deg,#ea7ab3,#d6478e);}
+  .recipe-media.cuisine-indian{background:linear-gradient(135deg,#a675dd,#7d4bc4);}
+  .cuisine-tag{
+    position:absolute;top:12px;left:12px;
+    background:rgba(255,255,255,0.9);color:var(--ink);
+    font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;
+    padding:5px 10px;border-radius:999px;
+  }
+  .recipe-body{padding:20px 20px 22px;display:flex;flex-direction:column;flex:1;}
+  .recipe-body h3{font-size:1.15rem;margin-bottom:6px;}
+  .recipe-meta{
+    display:flex;gap:14px;font-size:0.82rem;color:var(--ink-soft);margin-bottom:12px;flex-wrap:wrap;align-items:center;
+  }
+  .spice-level{display:inline-flex;align-items:center;gap:2px;}
+  .spice-level.spice-none{color:var(--ink-soft);opacity:0.7;font-style:italic;}
+  .pepper-on{filter:none;opacity:1;font-size:0.85rem;}
+  .pepper-off{filter:grayscale(1);opacity:0.3;font-size:0.85rem;}
+  .diet-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+  .diet-tag{
+    font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:999px;
+    background:var(--cream-dark);color:var(--olive);
+  }
+  .recipe-desc{color:var(--ink-soft);font-size:0.92rem;margin-bottom:14px;flex:1;}
+  .card-rating{display:flex;align-items:center;gap:4px;margin-bottom:14px;font-size:0.95rem;color:var(--cream-dark);}
+  .card-rating .star{cursor:default;}
+  .card-rating .star.filled{color:var(--gold);}
+  .card-rating .rating-note{font-size:0.75rem;color:var(--ink-soft);margin-left:6px;}
+  .recipe-toggle{
+    align-self:flex-start;background:none;border:2px solid var(--terracotta);color:var(--terracotta);
+    font-weight:700;cursor:pointer;font-size:0.85rem;padding:9px 18px;border-radius:999px;
+    transition:all 0.2s;
+  }
+  .recipe-toggle:hover{background:var(--terracotta);color:#fff;}
+
+  /* ---------- Recipe modal ---------- */
+  .modal-overlay{
+    display:none;position:fixed;inset:0;background:rgba(36,31,56,0.6);
+    z-index:200;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-card{
+    background:var(--white);border-radius:var(--radius);max-width:640px;width:100%;
+    overflow:hidden;box-shadow:var(--shadow);position:relative;
+  }
+  .modal-close{
+    position:absolute;top:14px;right:14px;z-index:2;
+    background:rgba(255,255,255,0.9);border:none;border-radius:50%;
+    width:34px;height:34px;font-size:1.1rem;cursor:pointer;color:var(--ink);
+  }
+  .modal-media{height:260px;position:relative;overflow:hidden;font-size:4rem;display:flex;align-items:center;justify-content:center;}
+  .modal-media img{width:100%;height:100%;object-fit:cover;}
+  .modal-body{padding:28px 28px 32px;}
+  .modal-body h3{font-size:1.5rem;margin-bottom:10px;font-family:Georgia,serif;}
+  .modal-rating{display:flex;align-items:center;gap:4px;margin-bottom:16px;}
+  .modal-rating .star{font-size:1.4rem;cursor:pointer;color:var(--cream-dark);transition:color 0.15s;}
+  .modal-rating .star.filled{color:var(--gold);}
+  .modal-rating .rating-note{font-size:0.8rem;color:var(--ink-soft);margin-left:8px;}
+  .modal-body h4{font-size:0.85rem;text-transform:uppercase;letter-spacing:0.5px;color:var(--olive);margin:18px 0 8px;}
+  .modal-body ul, .modal-body ol{padding-left:20px;color:var(--ink-soft);font-size:0.92rem;}
+  .modal-body li{margin-bottom:5px;}
+
+  /* ---------- About ---------- */
+  .about{background:var(--cream-dark);border-radius:var(--radius);}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+  @media (max-width:760px){ .about-grid{grid-template-columns:1fr;} }
+  .about h2{font-family:Georgia,serif;font-size:1.9rem;margin-bottom:16px;}
+  .about p{color:var(--ink-soft);margin-bottom:14px;}
+  .social-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;}
+  .social-link{
+    text-decoration:none;font-weight:600;font-size:0.9rem;color:var(--olive);
+    background:var(--white);border:1px solid var(--white);padding:8px 14px;border-radius:999px;
+    transition:transform 0.15s;
+  }
+  .social-link:hover{transform:translateY(-2px);}
+  .stat-row{display:flex;gap:32px;margin-top:24px;flex-wrap:wrap;}
+  .stat{}
+  .stat strong{display:block;font-size:1.7rem;color:var(--terracotta);font-family:Georgia,serif;}
+  .stat span{font-size:0.85rem;color:var(--ink-soft);}
+  .about-visual{
+    border-radius:var(--radius);aspect-ratio:1/1;
+    background:linear-gradient(135deg,var(--olive),#1c3f66);
+    display:flex;align-items:center;justify-content:center;font-size:4rem;
+    box-shadow:var(--shadow);
+  }
+
+  /* ---------- Newsletter ---------- */
+  .newsletter{
+    background:linear-gradient(135deg,var(--terracotta),#a52f6b);
+    border-radius:var(--radius);color:#fff;text-align:center;
+    padding:60px 24px;
+  }
+  .newsletter h2{font-family:Georgia,serif;font-size:2rem;margin-bottom:10px;}
+  .newsletter p{opacity:0.92;max-width:480px;margin:0 auto 28px;}
+  .newsletter-form{
+    display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:460px;margin:0 auto;
+  }
+  .newsletter-form input[type="email"]{
+    flex:1;min-width:220px;padding:13px 18px;border-radius:999px;border:none;
+    font-size:0.95rem;
+  }
+  .newsletter-form button{
+    background:var(--ink);color:#fff;border:none;padding:13px 26px;border-radius:999px;
+    font-weight:700;cursor:pointer;transition:opacity 0.2s;
+  }
+  .newsletter-form button:hover{opacity:0.85;}
+  .newsletter-note{margin-top:14px;font-size:0.85rem;opacity:0.85;}
+  .form-success{
+    display:none;background:rgba(255,255,255,0.15);border-radius:10px;
+    padding:12px 18px;margin-top:16px;font-weight:600;font-size:0.9rem;max-width:460px;margin-left:auto;margin-right:auto;
+  }
+  .form-success.show{display:block;}
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top:1px solid var(--cream-dark);
+    margin-top:24px;padding:36px 24px;
+    text-align:center;color:var(--ink-soft);font-size:0.85rem;
+  }
+  footer .logo{font-size:1.1rem;margin-bottom:8px;display:inline-block;}
+  .footer-links{display:flex;gap:20px;justify-content:center;margin:14px 0;flex-wrap:wrap;}
+  .footer-links a{text-decoration:none;color:var(--ink-soft);font-weight:600;}
+  .footer-links a:hover{color:var(--terracotta);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <div class="logo">Recipe <span>Secrets</span></div>
+    <nav>
+      <ul id="navMenu">
+        <li><a href="#recipes">Recipes</a></li>
+        <li><a href="#about">Our Founder</a></li>
+        <li><a href="#newsletter">Join Us</a></li>
+        <li><a href="booking.html" class="nav-cta">Book a Table</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div>
+    <span class="eyebrow">Launching Soon</span>
+    <h1>Unlock the <em>secret</em> flavors of Asia, India &amp; the Mediterranean</h1>
+    <p class="lead">Home-tested recipes, family techniques, and pantry secrets passed down and perfected — from sizzling stir-fries to fragrant curries to sun-drenched mezze spreads.</p>
+    <div class="hero-actions">
+      <a href="#recipes" class="btn btn-primary">Browse Recipes</a>
+      <a href="#newsletter" class="btn btn-outline">Get Early Access</a>
+    </div>
+    <div class="hero-badges">
+      <span class="badge">🥢 Asian Cuisine</span>
+      <span class="badge">🫒 Mediterranean Cuisine</span>
+      <span class="badge">🍛 Indian Cuisine</span>
+      <span class="badge">⏱️ Tested &amp; Timed</span>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="emoji-grid">
+      <span>🍜</span><span>🥙</span><span>🍢</span>
+      <span>🫒</span><span>🍚</span><span>🥗</span>
+    </div>
+  </div>
+</section>
+
+<section id="recipes">
+  <div class="section-head">
+    <span class="eyebrow">The Collection</span>
+    <h2>Recipes worth keeping secret</h2>
+    <p>A growing library of dishes from two of the world's most beloved culinary traditions.</p>
+  </div>
+
+  <div class="search-row">
+    <input type="search" id="searchInput" class="search-input" placeholder="Search recipes or ingredients (e.g. chickpeas, salmon, ginger)&hellip;">
+  </div>
+
+  <div class="filter-bar" id="filterBar">
+    <button class="filter-btn active" data-filter="all">All Recipes</button>
+    <button class="filter-btn" data-filter="asian">Asian</button>
+    <button class="filter-btn" data-filter="mediterranean">Mediterranean</button>
+    <button class="filter-btn" data-filter="indian">Indian</button>
+    <button class="filter-btn" data-quick="under20">&#9201;&#65039; Under 20 min</button>
+  </div>
+
+  <p class="no-results" id="noResults">No recipes match your search. Try a different term or filter.</p>
+
+  <div class="recipe-grid" id="recipeGrid"></div>
+</section>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-card" id="modalCard"></div>
+</div>
+
+<section id="about">
+  <div class="about">
+    <div class="about-grid" style="padding:48px;">
+      <div>
+        <span class="eyebrow">Meet the Founder</span>
+        <h2>Meera Nair</h2>
+        <p>Meera grew up cooking between two kitchens — her grandmother's in Kerala and a family friend's taverna in Crete during summers spent on the coast. Recipe Secrets is the notebook she never stopped filling: scribbled ratios of soy to rice vinegar, and how many olives is "enough."</p>
+        <p>After years as a line cook and recipe developer, she started Recipe Secrets to make bold, authentic flavor achievable on a weeknight — every recipe here has been cooked, tweaked, and cooked again.</p>
+        <div class="social-row">
+          <a href="mailto:hello@recipesecrets.example" class="social-link">✉️ Email</a>
+          <a href="#" class="social-link">📷 Instagram</a>
+          <a href="#" class="social-link">📌 Pinterest</a>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><strong>40+</strong><span>Recipes at launch</span></div>
+          <div class="stat"><strong>3</strong><span>Cuisines, deeply explored</span></div>
+          <div class="stat"><strong>15m</strong><span>Avg. weeknight prep</span></div>
+        </div>
+      </div>
+      <div class="about-visual">👩‍🍳</div>
+    </div>
+  </div>
+</section>
+
+<section id="newsletter">
+  <div class="newsletter">
+    <h2>Be the first to taste it</h2>
+    <p>Sign up for early access to Recipe Secrets — new recipes, cooking tips, and our launch date, straight to your inbox.</p>
+    <form class="newsletter-form" id="signupForm">
+      <input type="email" id="emailInput" placeholder="you@example.com" required>
+      <button type="submit">Notify Me</button>
+    </form>
+    <div class="form-success" id="formSuccess">🎉 You're on the list! Keep an eye on your inbox.</div>
+    <p class="newsletter-note">No spam, ever. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">Recipe <span style="color:var(--olive);">Secrets</span></div>
+  <div class="footer-links">
+    <a href="#recipes">Recipes</a>
+    <a href="#about">Our Founder</a>
+    <a href="#newsletter">Join Us</a>
+    <a href="booking.html">Book a Table</a>
+  </div>
+  <p>&copy; 2026 Recipe Secrets. All recipes made with love (and a little garlic).</p>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var recipes = [
+    {
+      title: "Ginger-Scallion Fried Rice",
+      slug: "ginger-scallion-fried-rice",
+      diet: ["Vegetarian"],
+      cuisine: "asian",
+      emoji: "🍚",
+      img: "https://upload.wikimedia.org/wikipedia/commons/1/1e/Fried_rice_schezwan_style.jpg",
+      time: "20 min",
+      difficulty: "Easy",
+      spice: 1,
+      desc: "Day-old rice, crispy garlic, and a fried egg on top. The ultimate use-what-you-have weeknight staple.",
+      ingredients: ["3 cups day-old cooked rice", "3 cloves garlic, minced", "1 inch ginger, minced", "4 scallions, sliced", "2 eggs", "3 tbsp soy sauce", "1 tsp sesame oil", "Neutral oil for frying"],
+      steps: ["Heat oil in a wok over high heat.", "Fry garlic and ginger until fragrant, about 30 seconds.", "Add rice, breaking up clumps, and stir-fry 4-5 minutes.", "Push rice aside, scramble eggs in the cleared space, then mix through.", "Add soy sauce, sesame oil, and half the scallions. Toss well.", "Top with remaining scallions and serve hot."]
+    },
+    {
+      title: "Miso-Glazed Salmon",
+      slug: "miso-glazed-salmon",
+      diet: ["Pescatarian", "Dairy-Free"],
+      cuisine: "asian",
+      emoji: "🐟",
+      img: "https://upload.wikimedia.org/wikipedia/commons/3/38/Liat_Portal_for_Foodie_Disorder_-_Oven-baked_teriyaki_salmon_with_vegetables.jpg",
+      time: "25 min",
+      difficulty: "Easy",
+      spice: 0,
+      desc: "A three-ingredient glaze that caramelizes into a sweet-savory crust under the broiler.",
+      ingredients: ["4 salmon fillets", "3 tbsp white miso paste", "2 tbsp mirin", "1 tbsp brown sugar", "1 tsp rice vinegar"],
+      steps: ["Whisk miso, mirin, brown sugar, and vinegar into a glaze.", "Coat salmon fillets and marinate 15 minutes.", "Broil on high for 8-10 minutes until caramelized and just cooked through.", "Rest 2 minutes, then serve over steamed rice."]
+    },
+    {
+      title: "Sichuan Dan Dan Noodles",
+      slug: "sichuan-dan-dan-noodles",
+      diet: ["Dairy-Free"],
+      cuisine: "asian",
+      emoji: "🍜",
+      img: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Dan-dan_noodles%2C_Shanghai.jpg",
+      time: "30 min",
+      difficulty: "Medium",
+      spice: 3,
+      desc: "Numbing chili oil, savory pork, and springy noodles — a bowl that hits every note at once.",
+      ingredients: ["10 oz fresh wheat noodles", "1/2 lb ground pork", "3 tbsp chili oil", "2 tbsp Sichuan peppercorn, toasted & ground", "3 tbsp soy sauce", "2 tbsp Chinkiang vinegar", "2 tbsp tahini or sesame paste", "2 cloves garlic, minced", "2 scallions, chopped"],
+      steps: ["Brown pork in a hot pan until crisp, set aside.", "In each bowl, mix chili oil, peppercorn, soy sauce, vinegar, tahini, and garlic.", "Cook noodles until just tender, then add directly to bowls with a splash of pasta water.", "Toss well, top with pork and scallions."]
+    },
+    {
+      title: "Classic Greek Village Salad",
+      slug: "classic-greek-village-salad",
+      diet: ["Vegetarian", "Gluten-Free"],
+      cuisine: "mediterranean",
+      emoji: "🥗",
+      img: "https://upload.wikimedia.org/wikipedia/commons/f/f2/Greece_Food_Horiatiki.JPG",
+      time: "15 min",
+      difficulty: "Easy",
+      spice: 0,
+      desc: "No lettuce, no fuss — just ripe tomatoes, cucumber, olives, and a thick slab of feta.",
+      ingredients: ["4 ripe tomatoes, chunked", "1 cucumber, sliced", "1/2 red onion, thinly sliced", "1/2 cup Kalamata olives", "1 block feta cheese", "1/4 cup olive oil", "1 tbsp red wine vinegar", "1 tsp dried oregano"],
+      steps: ["Combine tomatoes, cucumber, onion, and olives in a bowl.", "Drizzle with olive oil and vinegar, toss gently.", "Top with a whole slab of feta and a sprinkle of oregano.", "Serve immediately with crusty bread."]
+    },
+    {
+      title: "Lemon-Herb Hummus",
+      slug: "lemon-herb-hummus",
+      diet: ["Vegan", "Gluten-Free"],
+      cuisine: "mediterranean",
+      emoji: "🫒",
+      img: "https://upload.wikimedia.org/wikipedia/commons/9/9e/Hummus_Dip_%2830863436677%29.jpg",
+      time: "10 min",
+      difficulty: "Easy",
+      spice: 0,
+      desc: "Silky-smooth hummus, no tricks required — just the right ratio of tahini to lemon.",
+      ingredients: ["1 can chickpeas, drained (liquid reserved)", "1/3 cup tahini", "1 lemon, juiced", "1 clove garlic", "2 tbsp olive oil, plus more to serve", "1/2 tsp cumin", "Salt to taste"],
+      steps: ["Blend chickpeas, tahini, lemon juice, garlic, and cumin until smooth.", "Add reserved chickpea liquid a tablespoon at a time until creamy.", "Season with salt, spoon into a bowl, and swirl in olive oil.", "Serve with warm pita and fresh vegetables."]
+    },
+    {
+      title: "One-Pan Chicken Souvlaki",
+      slug: "one-pan-chicken-souvlaki",
+      diet: ["Gluten-Free"],
+      cuisine: "mediterranean",
+      emoji: "🍢",
+      img: "https://upload.wikimedia.org/wikipedia/commons/5/56/Chicken_souvlaki_at_Hellenic_2.jpg",
+      time: "35 min",
+      difficulty: "Medium",
+      spice: 1,
+      desc: "Charred, garlicky chicken skewers with a cool tzatziki — sheet-pan simple, taverna good.",
+      ingredients: ["1.5 lb chicken thighs, cubed", "1/4 cup olive oil", "2 lemons, juiced", "4 cloves garlic, minced", "1 tbsp dried oregano", "1 cup Greek yogurt", "1/2 cucumber, grated and squeezed dry", "1 tbsp fresh dill"],
+      steps: ["Marinate chicken in olive oil, half the lemon juice, garlic, and oregano for at least 30 minutes.", "Thread onto skewers and grill or broil, turning, until charred and cooked through (about 12 minutes).", "Mix yogurt, cucumber, remaining lemon juice, and dill for tzatziki.", "Serve skewers with tzatziki, warm pita, and sliced onion."]
+    },
+    {
+      title: "Butter Chicken",
+      slug: "butter-chicken",
+      diet: ["Gluten-Free"],
+      cuisine: "indian",
+      emoji: "🍛",
+      img: "https://upload.wikimedia.org/wikipedia/commons/b/b7/Murgh_Makhani_%28Butter_Chicken%29_2_%288925280003%29.jpg",
+      time: "45 min",
+      difficulty: "Medium",
+      spice: 2,
+      desc: "Rich, tomato-cream curry with charred marinated chicken — the dish that made Indian food a household favorite.",
+      ingredients: ["1.5 lb chicken thighs, cubed", "1 cup yogurt", "2 tbsp ginger-garlic paste", "2 tsp garam masala", "1 tsp turmeric", "1 tsp chili powder", "2 tbsp butter", "1 onion, finely chopped", "1 can crushed tomatoes", "1/2 cup heavy cream", "1 tsp kasuri methi (dried fenugreek leaves)"],
+      steps: ["Marinate chicken in yogurt, ginger-garlic paste, garam masala, turmeric, and chili powder for at least 1 hour.", "Sear chicken in a hot pan until charred at the edges; set aside.", "In the same pan, melt butter and sauté onion until golden.", "Add crushed tomatoes and simmer 10 minutes until thickened, then blend smooth.", "Return sauce to pan, stir in cream and kasuri methi, and simmer.", "Add chicken back in, simmer 10 minutes until cooked through, and serve with naan or rice."]
+    },
+    {
+      title: "Chana Masala",
+      slug: "chana-masala",
+      diet: ["Vegan", "Gluten-Free"],
+      cuisine: "indian",
+      emoji: "🫘",
+      img: "https://upload.wikimedia.org/wikipedia/commons/8/8e/Chana_masala.jpg",
+      time: "35 min",
+      difficulty: "Easy",
+      spice: 2,
+      desc: "A punchy, tangy chickpea curry that's entirely plant-based and just as satisfying as it is quick.",
+      ingredients: ["2 cans chickpeas, drained", "1 onion, finely chopped", "2 tomatoes, pureed", "1 tbsp ginger-garlic paste", "2 tsp cumin seeds", "2 tsp coriander powder", "1 tsp garam masala", "1 tsp amchur (dried mango powder) or lemon juice", "2 tbsp oil", "Fresh cilantro to garnish"],
+      steps: ["Heat oil and toast cumin seeds until fragrant.", "Add onion and cook until golden, then stir in ginger-garlic paste.", "Add tomato puree, coriander powder, and garam masala; simmer until oil separates.", "Add chickpeas and a splash of water, simmer 15 minutes to let flavors meld.", "Stir in amchur or lemon juice, mash a few chickpeas for body.", "Garnish with cilantro and serve with rice or roti."]
+    },
+    {
+      title: "Coconut Vegetable Korma",
+      slug: "coconut-vegetable-korma",
+      diet: ["Vegan", "Gluten-Free"],
+      cuisine: "indian",
+      emoji: "🥥",
+      img: "https://upload.wikimedia.org/wikipedia/commons/1/15/Vegetable_korma_%283329167060%29.jpg",
+      time: "30 min",
+      difficulty: "Easy",
+      spice: 1,
+      desc: "A mild, creamy coconut-cashew curry loaded with vegetables — comforting and fragrant with whole spices.",
+      ingredients: ["2 cups mixed vegetables (carrots, peas, potatoes, beans)", "1/2 cup cashews, soaked", "1/2 cup coconut milk", "1 onion, chopped", "1 tbsp ginger-garlic paste", "1 cinnamon stick", "3 cloves", "2 green cardamom pods", "1 tsp coriander powder", "1/2 tsp turmeric", "2 tbsp oil or ghee"],
+      steps: ["Blend soaked cashews with a little water into a smooth paste.", "Heat oil or ghee and bloom cinnamon, cloves, and cardamom until fragrant.", "Add onion and cook until soft, then stir in ginger-garlic paste.", "Add coriander powder and turmeric, cook 1 minute.", "Add vegetables and enough water to simmer until just tender.", "Stir in cashew paste and coconut milk, simmer until thickened, and serve with rice."]
+    }
+  ];
+
+  var grid = document.getElementById("recipeGrid");
+  var filterBar = document.getElementById("filterBar");
+  var searchInput = document.getElementById("searchInput");
+  var noResults = document.getElementById("noResults");
+  var currentFilter = "all";
+  var quickTime = false;
+  var searchQuery = "";
+
+  function cuisineLabel(c){
+    if (c === "asian") return "Asian";
+    if (c === "indian") return "Indian";
+    return "Mediterranean";
+  }
+
+  var RATING_KEY = "recipe-secrets-ratings";
+  function getRatings(){
+    try { return JSON.parse(localStorage.getItem(RATING_KEY)) || {}; }
+    catch(e) { return {}; }
+  }
+  function setRating(slug, value){
+    var ratings = getRatings();
+    ratings[slug] = value;
+    localStorage.setItem(RATING_KEY, JSON.stringify(ratings));
+  }
+
+  function starsMarkup(slug, interactive){
+    var ratings = getRatings();
+    var current = ratings[slug] || 0;
+    var cls = interactive ? "modal-rating" : "card-rating";
+    var html = '<div class="' + cls + '" data-slug="' + slug + '">';
+    for (var i = 1; i <= 5; i++) {
+      html += '<span class="star' + (i <= current ? " filled" : "") + '" data-value="' + i + '">' + (i <= current ? "★" : "☆") + '</span>';
+    }
+    html += current
+      ? '<span class="rating-note">Your rating: ' + current + '/5</span>'
+      : '<span class="rating-note">' + (interactive ? "Tap to rate" : "Not yet rated") + '</span>';
+    html += '</div>';
+    return html;
+  }
+
+  function dietMarkup(diet){
+    if (!diet || !diet.length) return "";
+    return '<div class="diet-tags">' + diet.map(function(d){ return '<span class="diet-tag">' + d + '</span>'; }).join("") + '</div>';
+  }
+
+  function parseMinutes(timeStr){
+    var m = /(\d+)/.exec(timeStr);
+    return m ? parseInt(m[1], 10) : 0;
+  }
+
+  function spiceMarkup(level){
+    if (!level) {
+      return '<span class="spice-level spice-none" title="Not spicy">Not spicy</span>';
+    }
+    var labels = { 1: "Mild", 2: "Medium", 3: "Hot" };
+    var peppers = "";
+    for (var i = 1; i <= 3; i++) {
+      peppers += '<span class="' + (i <= level ? "pepper-on" : "pepper-off") + '">🌶️</span>';
+    }
+    return '<span class="spice-level" title="' + labels[level] + '">' + peppers + ' ' + labels[level] + '</span>';
+  }
+
+  function matchesSearch(r, q){
+    if (!q) return true;
+    var haystack = (r.title + " " + r.desc + " " + r.ingredients.join(" ")).toLowerCase();
+    return haystack.indexOf(q) !== -1;
+  }
+
+  function render(){
+    grid.innerHTML = "";
+    var q = searchQuery.trim().toLowerCase();
+    var list = recipes.filter(function(r){
+      if (currentFilter !== "all" && r.cuisine !== currentFilter) return false;
+      if (quickTime && parseMinutes(r.time) >= 20) return false;
+      if (!matchesSearch(r, q)) return false;
+      return true;
+    });
+
+    noResults.classList.toggle("show", list.length === 0);
+
+    list.forEach(function(r){
+      var card = document.createElement("div");
+      card.className = "recipe-card";
+
+      var mediaClass = "recipe-media cuisine-" + r.cuisine;
+
+      card.innerHTML =
+        '<div class="' + mediaClass + '">' +
+          '<span class="cuisine-tag">' + cuisineLabel(r.cuisine) + '</span>' +
+          '<img src="' + r.img + '" alt="' + r.title + '" loading="lazy">' +
+        '</div>' +
+        '<div class="recipe-body">' +
+          '<h3>' + r.title + '</h3>' +
+          '<div class="recipe-meta"><span>⏱️ ' + r.time + '</span><span>📊 ' + r.difficulty + '</span>' + spiceMarkup(r.spice) + '</div>' +
+          dietMarkup(r.diet) +
+          '<p class="recipe-desc">' + r.desc + '</p>' +
+          starsMarkup(r.slug, false) +
+          '<button class="recipe-toggle" type="button">View Full Recipe</button>' +
+        '</div>';
+
+      var toggleBtn = card.querySelector(".recipe-toggle");
+      toggleBtn.addEventListener("click", function(){
+        openModal(r.slug);
+      });
+
+      var img = card.querySelector(".recipe-media img");
+      img.addEventListener("error", function(){
+        img.remove();
+        var media = card.querySelector(".recipe-media");
+        var fallback = document.createElement("span");
+        fallback.textContent = r.emoji;
+        media.appendChild(fallback);
+      });
+
+      grid.appendChild(card);
+    });
+  }
+
+  filterBar.addEventListener("click", function(e){
+    var btn = e.target.closest(".filter-btn");
+    if (!btn) return;
+
+    if (btn.hasAttribute("data-quick")) {
+      quickTime = !quickTime;
+      btn.classList.toggle("active", quickTime);
+      render();
+      return;
+    }
+
+    filterBar.querySelectorAll(".filter-btn[data-filter]").forEach(function(b){ b.classList.remove("active"); });
+    btn.classList.add("active");
+    currentFilter = btn.getAttribute("data-filter");
+    render();
+  });
+
+  searchInput.addEventListener("input", function(){
+    searchQuery = searchInput.value;
+    render();
+  });
+
+  // ---------- Recipe detail modal ----------
+  var modalOverlay = document.getElementById("modalOverlay");
+  var modalCard = document.getElementById("modalCard");
+
+  function findRecipe(slug){
+    for (var i = 0; i < recipes.length; i++) {
+      if (recipes[i].slug === slug) return recipes[i];
+    }
+    return null;
+  }
+
+  function openModal(slug){
+    var r = findRecipe(slug);
+    if (!r) return;
+
+    var ingredientsHtml = r.ingredients.map(function(i){ return "<li>" + i + "</li>"; }).join("");
+    var stepsHtml = r.steps.map(function(s){ return "<li>" + s + "</li>"; }).join("");
+
+    modalCard.innerHTML =
+      '<button class="modal-close" type="button" aria-label="Close">&times;</button>' +
+      '<div class="modal-media">' +
+        '<span class="cuisine-tag">' + cuisineLabel(r.cuisine) + '</span>' +
+        '<img src="' + r.img + '" alt="' + r.title + '" onerror="this.remove();">' +
+      '</div>' +
+      '<div class="modal-body">' +
+        '<h3>' + r.title + '</h3>' +
+        '<div class="recipe-meta"><span>⏱️ ' + r.time + '</span><span>📊 ' + r.difficulty + '</span>' + spiceMarkup(r.spice) + '</div>' +
+        dietMarkup(r.diet) +
+        '<p class="recipe-desc">' + r.desc + '</p>' +
+        starsMarkup(r.slug, true) +
+        '<h4>Ingredients</h4><ul>' + ingredientsHtml + '</ul>' +
+        '<h4>Method</h4><ol>' + stepsHtml + '</ol>' +
+      '</div>';
+
+    modalCard.querySelector(".modal-close").addEventListener("click", closeModal);
+
+    wireStars(r.slug);
+    modalOverlay.classList.add("open");
+    history.replaceState(null, "", "#recipe/" + r.slug);
+  }
+
+  function wireStars(slug){
+    var ratingBox = modalCard.querySelector(".modal-rating");
+    if (!ratingBox) return;
+    ratingBox.querySelectorAll(".star").forEach(function(starEl){
+      starEl.addEventListener("click", function(){
+        setRating(slug, parseInt(starEl.getAttribute("data-value"), 10));
+        ratingBox.outerHTML = starsMarkup(slug, true);
+        wireStars(slug);
+        render();
+      });
+    });
+  }
+
+  function closeModal(){
+    modalOverlay.classList.remove("open");
+    modalCard.innerHTML = "";
+    history.replaceState(null, "", location.pathname + location.search);
+  }
+
+  modalOverlay.addEventListener("click", function(e){
+    if (e.target === modalOverlay) closeModal();
+  });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape") closeModal();
+  });
+
+  function openFromHash(){
+    var m = /#recipe\/(.+)/.exec(location.hash);
+    if (m) openModal(decodeURIComponent(m[1]));
+  }
+
+  render();
+  openFromHash();
+  window.addEventListener("hashchange", openFromHash);
+
+  // Mobile nav toggle
+  var navToggle = document.getElementById("navToggle");
+  var navMenu = document.getElementById("navMenu");
+  navToggle.addEventListener("click", function(){
+    navMenu.classList.toggle("open");
+  });
+  navMenu.addEventListener("click", function(e){
+    if (e.target.tagName === "A") navMenu.classList.remove("open");
+  });
+
+  // Newsletter signup (client-side only, no backend)
+  var form = document.getElementById("signupForm");
+  var success = document.getElementById("formSuccess");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    success.classList.add("show");
+    form.reset();
+  });
+
+})();
+</script>
+
+</body>
+</html>

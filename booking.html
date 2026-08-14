@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a Table — Recipe Secrets</title>
+<style>
+  :root{
+    --terracotta:#d6478e;
+    --olive:#2f6fae;
+    --gold:#7fb3e8;
+    --cream:#f6f1fb;
+    --cream-dark:#eadff3;
+    --ink:#241f38;
+    --ink-soft:#5c5573;
+    --white:#ffffff;
+    --shadow:0 8px 24px rgba(36,31,56,0.12);
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(246,241,251,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--cream-dark);
+  }
+  .nav-wrap{
+    max-width:1100px;margin:0 auto;padding:16px 24px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{
+    font-family:Georgia, 'Times New Roman', serif;
+    font-size:1.5rem;font-weight:700;letter-spacing:0.5px;color:var(--terracotta);
+  }
+  .logo span{color:var(--olive);}
+  nav ul{list-style:none;display:flex;gap:28px;align-items:center;}
+  nav a{text-decoration:none;font-weight:600;font-size:0.95rem;color:var(--ink-soft);transition:color 0.2s;}
+  nav a:hover{color:var(--terracotta);}
+  nav a.nav-cta{background:var(--terracotta);color:#fff;padding:9px 18px;border-radius:999px;}
+  nav a.nav-cta:hover{color:#fff;opacity:0.9;}
+  .nav-toggle{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--ink);}
+
+  @media (max-width:720px){
+    nav ul{
+      position:absolute;top:100%;left:0;right:0;background:var(--cream);
+      flex-direction:column;padding:16px 24px;gap:16px;
+      border-bottom:1px solid var(--cream-dark);display:none;
+    }
+    nav ul.open{display:flex;}
+    .nav-toggle{display:block;}
+  }
+
+  .page-hero{
+    max-width:760px;margin:0 auto;padding:56px 24px 24px;text-align:center;
+  }
+  .eyebrow{
+    display:inline-block;text-transform:uppercase;letter-spacing:2px;font-size:0.75rem;
+    font-weight:700;color:var(--olive);background:var(--cream-dark);
+    padding:6px 14px;border-radius:999px;margin-bottom:18px;
+  }
+  .page-hero h1{
+    font-family:Georgia, 'Times New Roman', serif;
+    font-size:clamp(2rem, 4vw, 2.8rem);line-height:1.15;margin-bottom:14px;
+  }
+  .page-hero p{color:var(--ink-soft);font-size:1.05rem;}
+
+  main{max-width:640px;margin:0 auto;padding:24px 24px 80px;}
+
+  .booking-card{
+    background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:36px;
+  }
+  .meal-toggle{
+    display:flex;gap:12px;margin-bottom:24px;
+  }
+  .meal-option{
+    flex:1;text-align:center;padding:16px;border-radius:12px;
+    border:2px solid var(--cream-dark);cursor:pointer;font-weight:700;color:var(--ink-soft);
+    transition:all 0.2s;
+  }
+  .meal-option .meal-emoji{display:block;font-size:1.6rem;margin-bottom:6px;}
+  .meal-option.active{border-color:var(--terracotta);background:var(--cream);color:var(--terracotta);}
+
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width:520px){ .form-grid{grid-template-columns:1fr;} }
+  .form-field{margin-bottom:18px;}
+  .form-field.full{grid-column:1 / -1;}
+  .form-field label{
+    display:block;font-size:0.85rem;font-weight:700;color:var(--ink);margin-bottom:6px;
+  }
+  .form-field input, .form-field select, .form-field textarea{
+    width:100%;padding:12px 14px;border-radius:10px;border:2px solid var(--cream-dark);
+    font-size:0.95rem;font-family:inherit;color:var(--ink);background:var(--cream);
+  }
+  .form-field input:focus, .form-field select:focus, .form-field textarea:focus{
+    outline:none;border-color:var(--terracotta);
+  }
+  .form-field textarea{resize:vertical;min-height:80px;}
+  .form-hint{font-size:0.78rem;color:var(--ink-soft);margin-top:4px;}
+
+  .btn-submit{
+    width:100%;padding:15px;border-radius:999px;border:none;
+    background:var(--terracotta);color:#fff;font-weight:700;font-size:1rem;
+    cursor:pointer;transition:opacity 0.2s;box-shadow:0 6px 16px rgba(214,71,142,0.35);
+  }
+  .btn-submit:hover{opacity:0.9;}
+
+  .confirmation{
+    display:none;margin-top:24px;background:var(--cream);border:1px solid var(--cream-dark);
+    border-radius:12px;padding:20px;
+  }
+  .confirmation.show{display:block;}
+  .confirmation h3{font-family:Georgia,serif;margin-bottom:8px;color:var(--olive);}
+  .confirmation p{color:var(--ink-soft);font-size:0.92rem;margin-bottom:4px;}
+  .confirmation strong{color:var(--ink);}
+
+  .hours-note{
+    max-width:640px;margin:0 auto 8px;padding:0 24px;color:var(--ink-soft);font-size:0.85rem;text-align:center;
+  }
+
+  footer{
+    border-top:1px solid var(--cream-dark);
+    margin-top:24px;padding:36px 24px;text-align:center;color:var(--ink-soft);font-size:0.85rem;
+  }
+  footer .logo{font-size:1.1rem;margin-bottom:8px;display:inline-block;}
+  .footer-links{display:flex;gap:20px;justify-content:center;margin:14px 0;flex-wrap:wrap;}
+  .footer-links a{text-decoration:none;color:var(--ink-soft);font-weight:600;}
+  .footer-links a:hover{color:var(--terracotta);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <div class="logo">Recipe <span>Secrets</span></div>
+    <nav>
+      <ul id="navMenu">
+        <li><a href="index.html#recipes">Recipes</a></li>
+        <li><a href="index.html#about">Our Founder</a></li>
+        <li><a href="index.html#newsletter">Join Us</a></li>
+        <li><a href="booking.html" class="nav-cta">Book a Table</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+  </div>
+</header>
+
+<section class="page-hero">
+  <span class="eyebrow">Reservations</span>
+  <h1>Book your table</h1>
+  <p>Join us for lunch or dinner at the Recipe Secrets kitchen table — the same dishes from the site, cooked fresh and served family-style.</p>
+</section>
+
+<p class="hours-note">Lunch: 12:00 PM – 2:30 PM &nbsp;·&nbsp; Dinner: 6:00 PM – 9:30 PM &nbsp;·&nbsp; Closed Mondays</p>
+
+<main>
+  <div class="booking-card">
+    <form id="bookingForm">
+      <div class="meal-toggle" id="mealToggle">
+        <div class="meal-option active" data-meal="lunch">
+          <span class="meal-emoji">🥗</span>Lunch
+        </div>
+        <div class="meal-option" data-meal="dinner">
+          <span class="meal-emoji">🍽️</span>Dinner
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="fullName">Full name</label>
+          <input type="text" id="fullName" required placeholder="Jane Doe">
+        </div>
+        <div class="form-field">
+          <label for="partySize">Party size</label>
+          <input type="number" id="partySize" min="1" max="12" value="2" required>
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" required placeholder="you@example.com">
+        </div>
+        <div class="form-field">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" required placeholder="(555) 123-4567">
+        </div>
+        <div class="form-field">
+          <label for="date">Date</label>
+          <input type="date" id="date" required>
+        </div>
+        <div class="form-field">
+          <label for="time">Time</label>
+          <select id="time" required></select>
+        </div>
+        <div class="form-field full">
+          <label for="requests">Special requests (optional)</label>
+          <textarea id="requests" placeholder="Allergies, dietary preferences, celebrations…"></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit">Confirm Reservation</button>
+    </form>
+
+    <div class="confirmation" id="confirmation">
+      <h3>🎉 Reservation requested!</h3>
+      <p><strong id="confMeal"></strong></p>
+      <p id="confDetails"></p>
+      <p id="confParty"></p>
+      <p id="confContact"></p>
+      <p style="margin-top:10px;">We'll confirm by email shortly. See you at the table!</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="logo">Recipe <span style="color:var(--olive);">Secrets</span></div>
+  <div class="footer-links">
+    <a href="index.html#recipes">Recipes</a>
+    <a href="index.html#about">Our Founder</a>
+    <a href="index.html#newsletter">Join Us</a>
+    <a href="booking.html">Book a Table</a>
+  </div>
+  <p>&copy; 2026 Recipe Secrets. All recipes made with love (and a little garlic).</p>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var LUNCH_SLOTS = ["12:00 PM", "12:30 PM", "1:00 PM", "1:30 PM", "2:00 PM"];
+  var DINNER_SLOTS = ["6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM", "8:00 PM", "8:30 PM", "9:00 PM"];
+
+  var mealToggle = document.getElementById("mealToggle");
+  var timeSelect = document.getElementById("time");
+  var dateInput = document.getElementById("date");
+  var currentMeal = "lunch";
+
+  function populateTimes(){
+    var slots = currentMeal === "lunch" ? LUNCH_SLOTS : DINNER_SLOTS;
+    timeSelect.innerHTML = slots.map(function(s){ return '<option value="' + s + '">' + s + '</option>'; }).join("");
+  }
+  populateTimes();
+
+  var today = new Date();
+  dateInput.min = today.toISOString().split("T")[0];
+
+  mealToggle.addEventListener("click", function(e){
+    var opt = e.target.closest(".meal-option");
+    if (!opt) return;
+    mealToggle.querySelectorAll(".meal-option").forEach(function(o){ o.classList.remove("active"); });
+    opt.classList.add("active");
+    currentMeal = opt.getAttribute("data-meal");
+    populateTimes();
+  });
+
+  var form = document.getElementById("bookingForm");
+  var confirmation = document.getElementById("confirmation");
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    var name = document.getElementById("fullName").value;
+    var party = document.getElementById("partySize").value;
+    var email = document.getElementById("email").value;
+    var phone = document.getElementById("phone").value;
+    var date = dateInput.value;
+    var time = timeSelect.value;
+
+    var dateLabel = date
+      ? new Date(date + "T00:00:00").toLocaleDateString(undefined, { weekday: "long", year: "numeric", month: "long", day: "numeric" })
+      : "";
+
+    document.getElementById("confMeal").textContent =
+      (currentMeal === "lunch" ? "Lunch" : "Dinner") + " reservation for " + name;
+    document.getElementById("confDetails").textContent = dateLabel + " at " + time;
+    document.getElementById("confParty").textContent = "Party of " + party;
+    document.getElementById("confContact").textContent = "Confirmation will be sent to " + email + " / " + phone;
+
+    confirmation.classList.add("show");
+    confirmation.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+
+  var navToggle = document.getElementById("navToggle");
+  var navMenu = document.getElementById("navMenu");
+  navToggle.addEventListener("click", function(){
+    navMenu.classList.toggle("open");
+  });
+  navMenu.addEventListener("click", function(e){
+    if (e.target.tagName === "A") navMenu.classList.remove("open");
+  });
+})();
+</script>
+
+</body>
+</html>
