@@ -7,6 +7,7 @@
 <style>
   :root{
     --terracotta:#d6478e;
+    --btn-green:#2f9e44;
     --olive:#2f6fae;
     --gold:#7fb3e8;
     --cream:#f6f1fb;
@@ -54,7 +55,7 @@
   }
   nav a:hover{color:var(--terracotta);}
   nav a.nav-cta{
-    background:var(--terracotta);color:#fff;padding:9px 18px;border-radius:999px;
+    background:var(--btn-green);color:#fff;padding:9px 18px;border-radius:999px;
   }
   nav a.nav-cta:hover{color:#fff;opacity:0.9;}
   .nav-toggle{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--ink);}
@@ -110,7 +111,7 @@
     cursor:pointer;border:2px solid transparent;transition:transform 0.15s, box-shadow 0.15s;
   }
   .btn:hover{transform:translateY(-2px);}
-  .btn-primary{background:var(--terracotta);color:#fff;box-shadow:0 6px 16px rgba(214,71,142,0.35);}
+  .btn-primary{background:var(--btn-green);color:#fff;box-shadow:0 6px 16px rgba(47,158,68,0.35);}
   .btn-outline{background:transparent;border-color:var(--olive);color:var(--olive);}
   .hero-badges{display:flex;gap:10px;flex-wrap:wrap;}
   .badge{
@@ -159,8 +160,8 @@
     padding:10px 22px;border-radius:999px;font-weight:700;font-size:0.9rem;
     cursor:pointer;color:var(--ink-soft);transition:all 0.2s;
   }
-  .filter-btn:hover{border-color:var(--terracotta);color:var(--terracotta);}
-  .filter-btn.active{background:var(--terracotta);border-color:var(--terracotta);color:#fff;}
+  .filter-btn:hover{border-color:var(--btn-green);color:var(--btn-green);}
+  .filter-btn.active{background:var(--btn-green);border-color:var(--btn-green);color:#fff;}
   .no-results{display:none;text-align:center;color:var(--ink-soft);margin-bottom:24px;}
   .no-results.show{display:block;}
 
@@ -211,11 +212,11 @@
   .card-rating .star.filled{color:var(--gold);}
   .card-rating .rating-note{font-size:0.75rem;color:var(--ink-soft);margin-left:6px;}
   .recipe-toggle{
-    align-self:flex-start;background:none;border:2px solid var(--terracotta);color:var(--terracotta);
+    align-self:flex-start;background:none;border:2px solid var(--btn-green);color:var(--btn-green);
     font-weight:700;cursor:pointer;font-size:0.85rem;padding:9px 18px;border-radius:999px;
     transition:all 0.2s;
   }
-  .recipe-toggle:hover{background:var(--terracotta);color:#fff;}
+  .recipe-toggle:hover{background:var(--btn-green);color:#fff;}
 
   /* ---------- Recipe modal ---------- */
   .modal-overlay{
@@ -284,7 +285,7 @@
     font-size:0.95rem;
   }
   .newsletter-form button{
-    background:var(--ink);color:#fff;border:none;padding:13px 26px;border-radius:999px;
+    background:var(--btn-green);color:#fff;border:none;padding:13px 26px;border-radius:999px;
     font-weight:700;cursor:pointer;transition:opacity 0.2s;
   }
   .newsletter-form button:hover{opacity:0.85;}
