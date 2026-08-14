@@ -266,8 +266,9 @@
     border-radius:var(--radius);aspect-ratio:1/1;
     background:linear-gradient(135deg,var(--olive),#1c3f66);
     display:flex;align-items:center;justify-content:center;font-size:4rem;
-    box-shadow:var(--shadow);
+    box-shadow:var(--shadow);overflow:hidden;
   }
+  .about-visual img{width:100%;height:100%;object-fit:cover;}
 
   /* ---------- Newsletter ---------- */
   .newsletter{
@@ -396,7 +397,9 @@
           <div class="stat"><strong>15m</strong><span>Avg. weeknight prep</span></div>
         </div>
       </div>
-      <div class="about-visual">👩‍🍳</div>
+      <div class="about-visual">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Kerala_backwaters%2C_Vembanad_Lake%2C_Houseboats%2C_India.jpg" alt="Kerala backwaters with houseboats on Vembanad Lake" onerror="this.remove();this.parentElement.textContent='👩‍🍳';">
+      </div>
     </div>
   </div>
 </section>
@@ -555,6 +558,76 @@
       desc: "A mild, creamy coconut-cashew curry loaded with vegetables — comforting and fragrant with whole spices.",
       ingredients: ["2 cups mixed vegetables (carrots, peas, potatoes, beans)", "1/2 cup cashews, soaked", "1/2 cup coconut milk", "1 onion, chopped", "1 tbsp ginger-garlic paste", "1 cinnamon stick", "3 cloves", "2 green cardamom pods", "1 tsp coriander powder", "1/2 tsp turmeric", "2 tbsp oil or ghee"],
       steps: ["Blend soaked cashews with a little water into a smooth paste.", "Heat oil or ghee and bloom cinnamon, cloves, and cardamom until fragrant.", "Add onion and cook until soft, then stir in ginger-garlic paste.", "Add coriander powder and turmeric, cook 1 minute.", "Add vegetables and enough water to simmer until just tender.", "Stir in cashew paste and coconut milk, simmer until thickened, and serve with rice."]
+    },
+    {
+      title: "Kerala Onam Sadya",
+      slug: "kerala-onam-sadya",
+      diet: ["Vegetarian", "Gluten-Free"],
+      cuisine: "indian",
+      emoji: "🍌",
+      img: "https://upload.wikimedia.org/wikipedia/commons/6/65/Kerala_Onam_Sadya.jpg",
+      time: "90 min",
+      difficulty: "Hard",
+      spice: 1,
+      desc: "A full banana-leaf feast from Kerala — rice with sambar, rasam, thoran, and payasam, traditionally eaten with the fingers.",
+      ingredients: ["2 cups matta rice, cooked", "1 cup toor dal", "Mixed vegetables (drumstick, pumpkin, yam)", "2 tbsp sambar powder", "Tamarind pulp", "1 cup grated coconut", "1/2 tsp turmeric", "Mustard seeds & curry leaves for tempering", "1 cup jaggery", "1/2 cup coconut milk for payasam"],
+      steps: ["Cook toor dal with turmeric until soft; simmer with vegetables, tamarind, and sambar powder to make sambar.", "Steam a second batch of vegetables and toss with grated coconut, cumin, and green chili for thoran.", "Simmer jaggery with milk and a pinch of cardamom, then add cooked rice or vermicelli for payasam.", "Temper mustard seeds and curry leaves in coconut oil and finish the sambar and rasam with it.", "Arrange rice, sambar, thoran, pickle, papadum, and payasam on a banana leaf, largest items first.", "Serve family-style, eating with the right hand in the traditional order — savory to sweet."]
+    },
+    {
+      title: "Puttu with Kadala Curry",
+      slug: "puttu-with-kadala-curry",
+      diet: ["Vegan", "Gluten-Free"],
+      cuisine: "indian",
+      emoji: "🥥",
+      img: "https://upload.wikimedia.org/wikipedia/commons/f/f1/Puttu_and_Kadala_Curry.jpg",
+      time: "40 min",
+      difficulty: "Medium",
+      spice: 2,
+      desc: "Steamed cylinders of rice flour and coconut, served with a spiced black chickpea curry — Kerala's classic breakfast pairing.",
+      ingredients: ["2 cups roasted rice flour", "1 cup grated coconut", "Water, as needed", "1 cup black chickpeas, soaked overnight", "1 onion, chopped", "2 tomatoes, chopped", "1 tbsp ginger-garlic paste", "1 tsp coriander powder", "1/2 tsp turmeric", "1/2 tsp garam masala", "Mustard seeds & curry leaves for tempering"],
+      steps: ["Boil chickpeas until tender; reserve some cooking liquid.", "Sauté onion, ginger-garlic paste, and tomatoes until soft, then add turmeric, coriander, and garam masala.", "Add chickpeas and reserved liquid, simmer 15 minutes until the curry thickens, and temper with mustard seeds and curry leaves.", "Sprinkle rice flour with water until crumbly but not wet, and mix in grated coconut.", "Layer the flour and coconut in a puttu maker in alternating layers and steam 8-10 minutes.", "Unmold the puttu cylinders and serve hot alongside the kadala curry."]
+    },
+    {
+      title: "Kerala Fish Moilee",
+      slug: "kerala-fish-moilee",
+      diet: ["Pescatarian", "Dairy-Free", "Gluten-Free"],
+      cuisine: "indian",
+      emoji: "🐟",
+      img: "https://upload.wikimedia.org/wikipedia/commons/9/9e/Fish_Moilee_Kerala_Style_%28aka_KeralaFish_Molly%29.JPG",
+      time: "35 min",
+      difficulty: "Medium",
+      spice: 1,
+      desc: "Fish gently poached in a mellow, golden coconut-milk curry with green chili, ginger, and curry leaves.",
+      ingredients: ["1.5 lb firm white fish fillets", "2 cups coconut milk", "1 onion, thinly sliced", "2 green chilies, slit", "1 tbsp ginger, julienned", "3 cloves garlic, sliced", "1/2 tsp turmeric", "1 tsp black pepper, crushed", "Sprig of curry leaves", "2 tbsp coconut oil", "1 tsp vinegar or lime juice"],
+      steps: ["Rub fish with turmeric and salt, then sear lightly in coconut oil and set aside.", "In the same pan, sauté onion, ginger, garlic, and green chilies until softened.", "Add crushed pepper and curry leaves, then pour in coconut milk and bring to a gentle simmer (do not boil).", "Slide the fish back into the curry and poach 8-10 minutes until just cooked through.", "Finish with vinegar or lime juice off the heat.", "Serve warm with steamed rice or appam."]
+    },
+    {
+      title: "Avial",
+      slug: "avial",
+      diet: ["Vegetarian", "Gluten-Free"],
+      cuisine: "indian",
+      emoji: "🥕",
+      img: "https://upload.wikimedia.org/wikipedia/commons/d/d9/AVIYAL_in_Onasadya.jpg",
+      time: "30 min",
+      difficulty: "Easy",
+      spice: 1,
+      desc: "A medley of vegetables simmered in a thick coconut-yogurt sauce, finished with a drizzle of raw coconut oil and curry leaves.",
+      ingredients: ["3 cups mixed vegetables (carrot, drumstick, yam, green beans, raw banana), cut into batons", "1 cup grated coconut", "1 tsp cumin seeds", "2-3 green chilies", "1/2 cup yogurt", "1/2 tsp turmeric", "Sprig of curry leaves", "2 tbsp coconut oil"],
+      steps: ["Simmer the harder vegetables (yam, drumstick, carrot) in a little water with turmeric until nearly tender, then add quicker-cooking vegetables.", "Grind coconut, cumin, and green chilies to a coarse paste with a splash of water.", "Stir the coconut paste into the vegetables and simmer until everything is just cooked and the sauce clings.", "Remove from heat and fold in yogurt so it doesn't split.", "Top with a generous drizzle of raw coconut oil and curry leaves.", "Serve as part of a sadya or alongside plain rice."]
+    },
+    {
+      title: "Thalassery Chicken Biryani",
+      slug: "thalassery-chicken-biryani",
+      diet: ["Dairy-Free"],
+      cuisine: "indian",
+      emoji: "🍚",
+      img: "https://upload.wikimedia.org/wikipedia/commons/4/44/Prepared_Thalassery_Biriyani.jpg",
+      time: "75 min",
+      difficulty: "Hard",
+      spice: 2,
+      desc: "Malabar-style biryani made with fragrant khyma/jeerakasala rice, caramelized onions, and a richly spiced chicken masala.",
+      ingredients: ["2 cups khyma or jeerakasala rice", "1.5 lb chicken, bone-in pieces", "3 onions, thinly sliced", "2 tomatoes, chopped", "2 tbsp ginger-garlic paste", "2 green chilies, slit", "1 tsp garam masala", "1/2 tsp turmeric", "Whole spices (cinnamon, cloves, cardamom, star anise)", "1/4 cup chopped mint & cilantro", "3 tbsp ghee", "Cashews & raisins for garnish"],
+      steps: ["Deep-fry a portion of sliced onions until golden and crisp; reserve for layering.", "In ghee, bloom the whole spices, then sauté the remaining onions until soft and lightly browned.", "Add ginger-garlic paste, green chilies, tomatoes, turmeric, and garam masala; cook until the oil separates.", "Add chicken and cook through, stirring in half the mint and cilantro.", "Separately cook the rice with whole spices until just shy of done, then drain.", "Layer rice over the chicken masala, top with fried onions, herbs, and ghee-fried cashews and raisins, then cover and steam (dum) for 15-20 minutes before serving."]
     }
   ];
 
